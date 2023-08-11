@@ -1,9 +1,7 @@
 import './style.css';
 import { Component, h, render } from 'preact';
 import { useState } from 'preact/hooks';
-import globalReportData from './report.js';
-
-window.UNIPROT_DIFF_REPORT = globalReportData;
+// import globalReportData from './report.js';
 
 function ReportItem({ label, value, onClick }) {
     function handleClick(e) {
@@ -57,6 +55,10 @@ function App({reportData}) {
     function handleChangedSequenceClick(diff) {
         setSequenceDiff(diff);
         setShowSequenceDiff(true);
+    }
+
+    if (reportData === null) {
+        return <div><h4>No Report Data Provided</h4></div>
     }
 
     return <div id="report">
