@@ -30,7 +30,10 @@ function App({reportData}) {
 
     function handleSummaryClick(label) {
         setActiveSection(label);
+        if (label === 'changed GeneID') {
+        }
         setShowSequenceDetail(false);
+        setShowSequenceDiff(false);
     }
 
     function handleSequenceClick(seq) {
@@ -87,7 +90,7 @@ function App({reportData}) {
                 </div>
 
                 <div style={{display: showSequenceDiff ? 'block' : 'none'}}>
-                    <h2>Sequence Changes</h2>
+                    <h2>Sequence Changes for {sequenceDiff && sequenceDiff.accession}</h2>
                     <h3>Added Accessions</h3>
                     <ul>
                         {sequenceDiff && sequenceDiff.addedCrossRefs.map( xref =>
@@ -112,7 +115,25 @@ function App({reportData}) {
                             <li>{kw}</li>
                         )}
                     </ul>
-
+                    <h3>Details</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Old Value</th>
+                                <th>New Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {sequenceDiff && <pre style={{width: '800px', overflow: 'scroll'}} dangerouslySetInnerHTML={{__html: sequenceDiff.oldSequence.rawData}}></pre>}
+                                </td>
+                                <td>
+                                    {sequenceDiff && <pre style={{width: '800px', overflow: 'scroll'}} dangerouslySetInnerHTML={{__html: sequenceDiff.newSequence.rawData}}></pre>}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
 
