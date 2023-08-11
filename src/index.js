@@ -1,7 +1,5 @@
-import './style.css';
 import { Component, h, render } from 'preact';
 import { useState } from 'preact/hooks';
-// import globalReportData from './report.js';
 
 function ReportItem({ label, value, onClick }) {
     function handleClick(e) {

@@ -1,4 +1,3 @@
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import HtmlWebpackInlineSourcePlugin from 'html-webpack-inline-source-plugin';
 import path from 'path';
@@ -34,18 +33,10 @@ export default {
           plugins: ["babel-plugin-transform-object-rest-spread"]
         }
       },
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader?modules&localIdentName=" + (ENV == 'production' ? "[local]" : "[local]")
-        })
-      },
     ]
   },
 
   plugins: ([
-    new ExtractTextPlugin({ filename: 'style.css', allChunks: true, disable: ENV !== 'production' }),
     new HtmlWebpackPlugin({
       template: './index.ejs',
       minify: { collapseWhitespace: false },

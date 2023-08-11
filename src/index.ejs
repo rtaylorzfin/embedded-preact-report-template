@@ -3,13 +3,40 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            font: 14px/1.21 'Helvetica Neue', arial, sans-serif;
+            font-weight: 400;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        td {
+            vertical-align: top;
+        }
+
+        #content {
+            width: 1000px;
+            display: flex;
+        }
+
+        #left-nav {
+            width: 270px;
+        }
+
+        #right-content {
+            width: 730px;
+        }
+    </style>
+
     <% if(process.env.NODE_ENV != 'production') { %>
-    <% for (var chunk in htmlWebpackPlugin.files.css) { %>
-    <link rel="preload" href="<%= htmlWebpackPlugin.files.css[chunk] %>" as="style">
-    <% } %>
+
     <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
     <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" as="script">
     <% } %>
+
     <% } %>
 </head>
 <body>
