@@ -27,10 +27,24 @@ function App({reportData}) {
     const [sequenceDetail, setSequenceDetail] = useState(null);
     const [sequenceDiff, setSequenceDiff] = useState(null);
     const [activeSection, setActiveSection] = useState('none');
+    const [changeFilter, setChangeFilter] = useState(null);
 
     function handleSummaryClick(label) {
         setActiveSection(label);
+        if (label === 'changed') {
+            setChangeFilter(null);
+        }
         if (label === 'changed GeneID') {
+            setChangeFilter('GeneID');
+        }
+        if (label === 'changed RefSeq') {
+            setChangeFilter('RefSeq');
+        }
+        if (label === 'changed ZFIN') {
+            setChangeFilter('ZFIN');
+        }
+        if (label.includes('changed')) {
+            setActiveSection('changed');
         }
         setShowSequenceDetail(false);
         setShowSequenceDiff(false);
@@ -78,7 +92,11 @@ function App({reportData}) {
                 <div style={{display: activeSection === 'changed' ? 'block' : 'none'}}>
                     <h2>Changed Sequences</h2>
                     <ul>
-                        {reportData.changedSequences.map( diff =>
+                        {reportData.changedSequences
+                            .filter( diff => changeFilter === null ||
+                                diff.addedCrossRefs.some( xref => xref.dbName === changeFilter) ||
+                                diff.removedCrossRefs.some( xref => xref.dbName === changeFilter))
+                            .map( diff =>
                             <li><a href='#' onClick={() => handleChangedSequenceClick(diff)}>{diff.accession}</a></li>
                         )}
                     </ul>
