@@ -9,6 +9,7 @@
   "scripts": {
     "build:em": "NODE_ENV=production webpack -p --progress && ./embedded.sh",
     "build": "NODE_ENV=production webpack -p --progress && node cssoptimizer.js",
+    "build-dev": "NODE_ENV=development webpack -p --progress && node cssoptimizer.js",
     "start": "npm run webpack-dev-server -- --env.mode development",
     "clean": "rimraf build",
     "test": "jest --coverage",
@@ -17,7 +18,9 @@
     "webpack-dev-server": "webpack-dev-server --history-api-fallback"
   },
   "dependencies": {
-    "preact": "^10.0.0"
+    "htm": "^3.1.1",
+    "preact": "^10.0.0",
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
