@@ -64,7 +64,7 @@ function App({reportData}) {
 
     return <div id="report">
                 <h1>UniProt Diffs Report</h1>
-                <h2>Changes from May 2023 to June 2023</h2>
+                <h2 style={{textAlign: 'center'}}>Changes from May 2023 to June 2023</h2>
                 <h2>Summary</h2>
                 <ul>
                     {Object.entries(reportData.summary).map( ([label, value]) =>
