@@ -6,3 +6,20 @@ html, body {
 h1 {
 	text-align: center;
 }
+
+td {
+	vertical-align: top;
+}
+
+#content {
+	width: 1000px;
+	display: flex;
+}
+
+#left-nav {
+    width: 270px;
+}
+
+#right-content {
+	width: 730px;
+}
