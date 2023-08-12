@@ -115,25 +115,29 @@ function App({reportData}) {
                                 {sequenceDiff && sequenceDiff.addedCrossRefs.map( xref =>
                                     <li>{xref.dbName}: {xref.accession}</li>
                                 )}
+                                {sequenceDiff && sequenceDiff.addedCrossRefs.length === 0 &&
+                                    <li>None</li>}
                             </ul>
                             <h3>Removed Accessions</h3>
                             <ul>
                                 {sequenceDiff && sequenceDiff.removedCrossRefs.map( xref =>
                                     <li>{xref.dbName}: {xref.accession}</li>
                                 )}
+                                {sequenceDiff && sequenceDiff.removedCrossRefs.length === 0 &&
+                                    <li>None</li>}
                             </ul>
-                            <h3>Added Keywords</h3>
-                            <ul>
-                                {sequenceDiff && sequenceDiff.addedKeywords.map( kw =>
-                                    <li>{kw}</li>
-                                )}
-                            </ul>
-                            <h3>Removed Keywords</h3>
-                            <ul>
-                                {sequenceDiff && sequenceDiff.removedKeywords.map( kw =>
-                                    <li>{kw}</li>
-                                )}
-                            </ul>
+                            {/*<h3>Added Keywords</h3>*/}
+                            {/*<ul>*/}
+                            {/*    {sequenceDiff && sequenceDiff.addedKeywords.map( kw =>*/}
+                            {/*        <li>{kw}</li>*/}
+                            {/*    )}*/}
+                            {/*</ul>*/}
+                            {/*<h3>Removed Keywords</h3>*/}
+                            {/*<ul>*/}
+                            {/*    {sequenceDiff && sequenceDiff.removedKeywords.map( kw =>*/}
+                            {/*        <li>{kw}</li>*/}
+                            {/*    )}*/}
+                            {/*</ul>*/}
                             <h3>Details</h3>
                             <table>
                                 <thead>
