@@ -8,8 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build:em": "NODE_ENV=production webpack -p --progress && ./embedded.sh",
-    "build": "NODE_ENV=production webpack -p --progress && node cssoptimizer.js",
-    "build-dev": "NODE_ENV=development webpack -p --progress && node cssoptimizer.js",
+    "build": "NODE_ENV=production webpack -p --progress",
     "start": "npm run webpack-dev-server -- --env.mode development",
     "clean": "rimraf build",
     "test": "jest --coverage",
