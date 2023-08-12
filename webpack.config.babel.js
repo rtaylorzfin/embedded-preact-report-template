@@ -62,6 +62,12 @@ export default {
             `.trim();
 
             const modifiedSource = source.replace(placeholderText, `window.UNIPROT_DIFF_REPORT = ${reportSource}`);
+
+            //make directory if not exists
+            if (!fs.existsSync(path.resolve(__dirname, "build"))) {
+                fs.mkdirSync(path.resolve(__dirname, "build"));
+            }
+
             fs.writeFileSync(path.resolve(__dirname, "build/modified.html"), modifiedSource, 'utf8');
           }
 
