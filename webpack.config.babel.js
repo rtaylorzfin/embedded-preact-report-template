@@ -57,11 +57,11 @@ export default {
 
             const placeholderText = `
     //PLACEHOLDER_START
-    window.UNIPROT_DIFF_REPORT = null;
+    window.UNIPROT_DIFF_REPORT = JSON_GOES_HERE;
     //PLACEHOLDER_END
             `.trim();
 
-            const modifiedSource = source.replace(placeholderText, `window.UNIPROT_DIFF_REPORT = ${reportSource}`);
+            const modifiedSource = source.replace(placeholderText, `window.UNIPROT_DIFF_REPORT = ${reportSource};`);
 
             //make directory if not exists
             if (!fs.existsSync(path.resolve(__dirname, "build"))) {
