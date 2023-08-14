@@ -1,22 +1,27 @@
-import { Component, h, render } from 'preact';
+import { h, render } from 'preact';
 import { useState } from 'preact/hooks';
 
-function ReportItem({ label, value, onClick }) {
-    function handleClick(e) {
-        e.preventDefault();
+function ReportSummary({ summary, onClick }) {
+    function handleClick(label) {
         onClick(label);
     }
 
-    return <li>
-                <a href="#" onClick={handleClick}>
-                    {label}: {value}
-                </a>
-            </li>
+    return <ul>
+        <li><a href="#" onClick={() => handleClick('added')}>Added: {summary.added}</a></li>
+        <li><a href="#" onClick={() => handleClick('changed')}>Changed: {summary.changed}</a>
+            <ul>
+                <li><a href="#" onClick={() => handleClick('changed GeneID')}>GeneID: {summary['changed GeneID']}</a></li>
+                <li><a href="#" onClick={() => handleClick('changed RefSeq')}>RefSeq: {summary['changed RefSeq']}</a></li>
+                <li><a href="#" onClick={() => handleClick('changed ZFIN')}>ZFIN: {summary['changed ZFIN']}</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onClick={() => handleClick('removed')}>Removed: {summary.removed}</a></li>
+        <li>Total: {summary.total}</li>
+    </ul>;
 }
 
 
 function App({reportData}) {
-    const [showAddedSequences, setShowAddedSequences] = useState(false);
     const [showSequenceDetail, setShowSequenceDetail] = useState(false);
     const [showSequenceDiff, setShowSequenceDiff] = useState(false);
     const [sequenceDetail, setSequenceDetail] = useState(null);
@@ -61,15 +66,11 @@ function App({reportData}) {
 
     return <div id="report">
                 <h1>UniProt Diffs Report</h1>
-                <h2 style={{textAlign: 'center'}}>Changes from May 2023 to June 2023</h2>
+                <h2 style={{textAlign: 'center'}}>Changes from {reportData.summary['latest update in set 1']} to {reportData.summary['latest update in set 2']}</h2>
                 <div id='content'>
                 <div id="left-nav">
                         <h2>Summary</h2>
-                        <ul>
-                            {Object.entries(reportData.summary).map( ([label, value]) =>
-                                <ReportItem label={label} value={value} onClick={handleSummaryClick} />
-                            )}
-                        </ul>
+                        <ReportSummary summary={reportData.summary} onClick={handleSummaryClick} />
 
                         <div style={{display: activeSection === 'added' ? 'block' : 'none'}}>
                             <h2>Added Sequences</h2>
